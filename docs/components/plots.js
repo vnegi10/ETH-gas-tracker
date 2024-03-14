@@ -1,7 +1,7 @@
 import * as Plot from "npm:@observablehq/plot";
 //import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 
-export function plot_fee(gas_fee_dates, {width} = {}) {
+export function plotFeeRaw(gas_fee_dates, {width} = {}) {
 
     return Plot.plot({
       width,
@@ -20,3 +20,15 @@ export function plot_fee(gas_fee_dates, {width} = {}) {
     });
   
   }
+
+export function plotFeeMovingAverage(gas_fee_dates, {width} = {}) {
+
+    return Plot.plot({
+        color: {scheme: "BuRd"},
+        marks: [
+          Plot.ruleY([0]),
+          Plot.dot(gas_fee_dates, {x: "time", y: "fee", stroke: "fee"}),
+          Plot.lineY(gas_fee_dates, Plot.windowY(5, {x: "time", y: "fee"}))
+        ]
+      })
+}

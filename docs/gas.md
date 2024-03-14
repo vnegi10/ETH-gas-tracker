@@ -3,10 +3,10 @@ theme: dashboard
 toc: false
 ---
 
-# Track base fee per unit of gas
+# Base fee per block
 
 ```js
-import {plot_fee} from "./components/plots.js";
+import {plotFeeRaw, plotFeeMovingAverage} from "./components/plots.js";
 ```
 
 ```js
@@ -32,5 +32,13 @@ gas_fee_dates = gas_fee.map(({time, ...rest}) => {
 ```
 
 <div class="grid grid-cols-1">
-    <div class="card">${resize((width) => plot_fee(gas_fee_dates, {width}))} </div>
+    <div class="card">${resize((width) => plotFeeRaw(gas_fee_dates, {width}))} </div>
+</div>
+
+---
+
+# Base fee moving average ( 5 blocks)
+
+<div class="grid grid-cols-1">
+    <div class="card">${resize((width) => plotFeeMovingAverage(gas_fee_dates, {width}))} </div>
 </div>
