@@ -37,8 +37,8 @@ gas_fee_dates = gas_fee.map(({time, ...rest}) => {
 
 ---
 
-# Base fee moving average ( 5 blocks)
+# Base fee moving average (10 blocks)
 
 <div class="grid grid-cols-1">
-    <div class="card">${resize((width) => plotFeeMovingAverage(gas_fee_dates, {width}))} </div>
+    <div class="card">${resize((width) => plotFeeMovingAverage(gas_fee_dates, 10, {width}))} </div>
 </div>

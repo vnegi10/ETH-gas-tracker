@@ -9,6 +9,7 @@ export function plotFeeRaw(gas_fee_dates, {width} = {}) {
       x: {label: "UTC time", type: "utc"},
       y: {grid: true, label: "Fee [Gwei]"},
       marks: [
+        Plot.ruleY([0]),
         Plot.lineY(gas_fee_dates, {
           x: "time",
           //interval: "second",
@@ -21,14 +22,15 @@ export function plotFeeRaw(gas_fee_dates, {width} = {}) {
   
   }
 
-export function plotFeeMovingAverage(gas_fee_dates, {width} = {}) {
+export function plotFeeMovingAverage(gas_fee_dates, window, {width} = {}) {
 
     return Plot.plot({
+        width,
         color: {scheme: "BuRd"},
         marks: [
           Plot.ruleY([0]),
           Plot.dot(gas_fee_dates, {x: "time", y: "fee", stroke: "fee"}),
-          Plot.lineY(gas_fee_dates, Plot.windowY(5, {x: "time", y: "fee"}))
+          Plot.lineY(gas_fee_dates, Plot.windowY(window, {x: "time", y: "fee"}))
         ]
       })
 }
