@@ -5,7 +5,7 @@ export function plotFeeRaw(gas_fee_dates, {width} = {}) {
 
     return Plot.plot({
       width,
-      title: "Data for last 100 blocks",
+      title: "Data for last 500 blocks",
       x: {label: "UTC time", type: "utc"},
       y: {grid: true, label: "Fee [Gwei]"},
       marks: [
@@ -15,7 +15,7 @@ export function plotFeeRaw(gas_fee_dates, {width} = {}) {
           //interval: "second",
           y: "fee",
           stroke: "green",
-          marker: true,
+          //marker: true,
           })
       ]
     });
@@ -26,6 +26,7 @@ export function plotFeeMovingAverage(gas_fee_dates, window, {width} = {}) {
 
     return Plot.plot({
         width,
+        title: "Window size = 10 blocks (2 minutes)",
         color: {scheme: "BuRd"},
         marks: [
           Plot.ruleY([0]),
