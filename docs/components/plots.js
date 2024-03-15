@@ -15,6 +15,7 @@ export function plotFeeRaw(gas_fee_dates, {width} = {}) {
           //interval: "second",
           y: "fee",
           stroke: "green",
+          tip: true
           //marker: true,
           })
       ]
@@ -30,8 +31,13 @@ export function plotFeeMovingAverage(gas_fee_dates, window, {width} = {}) {
         color: {scheme: "BuRd"},
         marks: [
           Plot.ruleY([0]),
-          Plot.dot(gas_fee_dates, {x: "time", y: "fee", stroke: "fee"}),
-          Plot.lineY(gas_fee_dates, Plot.windowY(window, {x: "time", y: "fee"}))
+          Plot.dot(gas_fee_dates, {x: "time",
+                                   y: "fee",
+                                   stroke: "fee",
+                                   tip: true}),
+          Plot.lineY(gas_fee_dates, Plot.windowY(window, 
+                                                 {x: "time", 
+                                                  y: "fee"}))
         ]
       })
 }
