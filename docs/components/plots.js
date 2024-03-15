@@ -28,6 +28,8 @@ export function plotFeeMovingAverage(gas_fee_dates, window, {width} = {}) {
     return Plot.plot({
         width,
         title: "Window size = 10 blocks (2 minutes)",
+        x: {label: "UTC time", type: "utc"},
+        y: {grid: true, label: "Fee [Gwei]"},
         color: {scheme: "BuRd"},
         marks: [
           Plot.ruleY([0]),
