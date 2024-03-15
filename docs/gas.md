@@ -3,36 +3,19 @@ theme: dashboard
 toc: false
 ---
 
-# Base fee per block
-
 ```js
 import {plotFeeRaw, plotFeeMovingAverage} from "./components/plots.js";
+import {convertDates} from "./components/helpers.js";
 ```
 
 ```js
 const gas_fee = FileAttachment("./data/fee.json").json();
 ```
 
-```js
-// Convert String to Date object so that we make plots later
-var gas_fee_dates
-gas_fee_dates = gas_fee.map(({time, ...rest}) => {
-  return {
-    time: new Date(Date.UTC(
-              parseInt(time.substr(0, 4)),   // Year
-              parseInt(time.substr(5, 2)) - 1, // Month (zero-based)
-              parseInt(time.substr(8, 2)),     // Day
-              parseInt(time.substr(11, 2)),    // Hour
-              parseInt(time.substr(14, 2)),    // Minute
-              parseInt(time.substr(17, 2))     // Second
-    )),
-    ...rest
-  };
-})
-```
+# Base fee per block
 
 <div class="grid grid-cols-1">
-    <div class="card">${resize((width) => plotFeeRaw(gas_fee_dates, {width}))} </div>
+    <div class="card">${resize((width) => plotFeeRaw(convertDates(gas_fee), {width}))} </div>
 </div>
 
 ---
@@ -40,5 +23,5 @@ gas_fee_dates = gas_fee.map(({time, ...rest}) => {
 # Base fee moving average
 
 <div class="grid grid-cols-1">
-    <div class="card">${resize((width) => plotFeeMovingAverage(gas_fee_dates, 10, {width}))} </div>
+    <div class="card">${resize((width) => plotFeeMovingAverage(convertDates(gas_fee), 10, {width}))} </div>
 </div>
