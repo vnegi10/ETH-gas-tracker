@@ -1,7 +1,7 @@
 import * as Plot from "npm:@observablehq/plot";
 //import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 
-export function plotFeeRaw(gas_fee_dates, {width} = {}) {
+export function plotFeeRaw(gas_fee_times, {width} = {}) {
 
     return Plot.plot({
       width,
@@ -10,7 +10,7 @@ export function plotFeeRaw(gas_fee_dates, {width} = {}) {
       y: {grid: true, label: "Fee [Gwei]"},
       marks: [
         Plot.ruleY([0]),
-        Plot.lineY(gas_fee_dates, {
+        Plot.lineY(gas_fee_times, {
           x: "time",
           //interval: "second",
           y: "fee",
@@ -23,7 +23,7 @@ export function plotFeeRaw(gas_fee_dates, {width} = {}) {
   
   }
 
-export function plotFeeMovingAverage(gas_fee_dates, window, {width} = {}) {
+export function plotFeeMovingAverage(gas_fee_times, window, {width} = {}) {
 
     return Plot.plot({
         width,
@@ -33,13 +33,44 @@ export function plotFeeMovingAverage(gas_fee_dates, window, {width} = {}) {
         color: {scheme: "BuRd"},
         marks: [
           Plot.ruleY([0]),
-          Plot.dot(gas_fee_dates, {x: "time",
+          Plot.dot(gas_fee_times, {x: "time",
                                    y: "fee",
                                    stroke: "fee",
                                    tip: true}),
-          Plot.lineY(gas_fee_dates, Plot.windowY(window, 
+          Plot.lineY(gas_fee_times, Plot.windowY(window, 
                                                  {x: "time", 
                                                   y: "fee"}))
+        ]
+      })
+}
+
+export function plotPriceWindow(price, window, {width} = {}) {
+
+    return Plot.plot({
+        width,
+        title: "Window size = 10 minutes, max: red, min: blue, mean: green",
+        x: {label: "UTC time", type: "utc"},
+        y: { grid: true, label: "Price [euros]"},
+        //color: {legend: true},
+        marks: [
+          //Plot.legend({color: {type: "linear"}}),
+          Plot.lineY(price, {x: "time",
+                             y: "close",
+                             stroke: "grey",
+                             strokeOpacity: 0.5,
+                             marker: "circle-stroke"}),
+          Plot.lineY(price, Plot.windowY({k: window,
+                                          reduce: "min"}, {x: "time",
+                                                           y: "close",
+                                                           stroke: "blue"})),
+          Plot.lineY(price, Plot.windowY({k: window,
+                                          reduce: "max"}, {x: "time",
+                                                           y: "close",
+                                                           stroke: "red"})),
+          Plot.lineY(price, Plot.windowY({k: window,
+                                          reduce: "mean"}, {x: "time",
+                                                              y: "close",
+                                                              stroke: "green"}))
         ]
       })
 }
