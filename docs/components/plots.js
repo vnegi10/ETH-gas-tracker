@@ -62,15 +62,18 @@ export function plotPriceWindow(price, window, {width} = {}) {
           Plot.lineY(price, Plot.windowY({k: window,
                                           reduce: "min"}, {x: "time",
                                                            y: "close",
-                                                           stroke: "blue"})),
+                                                           stroke: "blue",
+                                                           tip: true})),
           Plot.lineY(price, Plot.windowY({k: window,
                                           reduce: "max"}, {x: "time",
                                                            y: "close",
-                                                           stroke: "red"})),
+                                                           stroke: "red",
+                                                           tip: true})),
           Plot.lineY(price, Plot.windowY({k: window,
                                           reduce: "mean"}, {x: "time",
-                                                              y: "close",
-                                                              stroke: "green"}))
+                                                            y: "close",
+                                                            stroke: "green",
+                                                            tip: true}))
         ]
       })
 }
