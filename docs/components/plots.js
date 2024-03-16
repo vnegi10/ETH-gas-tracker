@@ -5,7 +5,7 @@ export function plotFeeRaw(gas_fee_times, {width} = {}) {
 
     return Plot.plot({
       width,
-      title: "Data for last 500 blocks",
+      title: "Data for last 600 blocks",
       x: {label: "UTC time", type: "utc"},
       y: {grid: true, label: "Fee [Gwei]"},
       marks: [

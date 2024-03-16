@@ -9,6 +9,6 @@ const URL = "https://mainnet.infura.io/v3/$(key["API_key"])"
 
 include("helpers.jl")
 
-fee_dict = get_basefee_all(500)
+fee_dict = get_basefee_all(600)
 
 JSON.print(stdout, fee_dict)
