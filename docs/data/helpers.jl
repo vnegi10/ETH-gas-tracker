@@ -1,3 +1,5 @@
+using Dates
+
 function generate_body(RPC_name::String, params)
 
     body_dict = Dict("method"  => RPC_name,
@@ -80,4 +82,33 @@ function get_basefee_all(num_blocks::Int64)
     end
 
     return fee_dict
+end
+
+function get_basefee_fiat!(df_price, fee_dict)
+
+    for (i, single_fee) in enumerate(fee_dict)
+        t = single_fee["time"]
+        h = Dates.hour(t)
+        m = Dates.minute(t)
+
+        # Find closest timestamp in price DataFrame
+        df_match = filter(row -> Dates.hour(row.time) == h &&
+                                 Dates.minute(row.time) == m, df_price)
+
+        # Gwei to eth
+        fee_eth = single_fee["fee"] * 10^-9
+
+        # Standard transaction
+        gas_limit = 21_000
+
+        if ~isempty(df_match)
+            fee_dict[i]["fee_eur"] = round(fee_eth * gas_limit * df_match[!, :close][1]; digits = 2)
+        else
+            # Use the latest price available
+            fee_dict[i]["fee_eur"] = round(fee_eth * gas_limit * df_price[!, :close][end]; digits = 2)
+        end
+    end
+
+    return fee_dict
+
 end

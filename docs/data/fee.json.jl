@@ -2,7 +2,7 @@ using Pkg
 Pkg.activate(@__DIR__)
 Pkg.instantiate()
 
-using JSON, HTTP, Dates
+using JSON, HTTP, Dates, CoinbaseProExchange
 
 local_file = "/home/vikas/Documents/Infura_API_key.json"
 key = ""
@@ -22,7 +22,12 @@ const URL = "https://mainnet.infura.io/v3/$(key)"
 
 include("helpers.jl")
 
+# Get exchange data
+df_price, _ = show_historical_data("ETH-EUR", 60)
+
 # 1500 blocks = 5 hours of historical data (12 seconds per block)
 fee_dict = get_basefee_all(1500)
+
+get_basefee_fiat!(df_price, fee_dict)
 
 JSON.print(stdout, fee_dict)
