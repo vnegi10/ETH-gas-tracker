@@ -4,8 +4,21 @@ Pkg.instantiate()
 
 using JSON, HTTP, Dates
 
-key = JSON.parsefile("/home/vikas/Documents/Infura_API_key.json")
-const URL = "https://mainnet.infura.io/v3/$(key["API_key"])"
+local_file = "/home/vikas/Documents/Infura_API_key.json"
+key = ""
+
+if isfile(local_file)
+    key = JSON.parsefile(local_file)
+    key = key["API_key"]
+else
+    if haskey(ENV, "INFURA_KEY")
+        key = ENV["INFURA_KEY"]
+    else
+        error("API key for Infura has not been provided!")
+    end
+end
+
+const URL = "https://mainnet.infura.io/v3/$(key)"
 
 include("helpers.jl")
 
