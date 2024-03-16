@@ -5,7 +5,7 @@ export function plotFeeRaw(gas_fee_times, {width} = {}) {
 
     return Plot.plot({
       width,
-      title: "Data for last 1500 blocks",
+      title: "Data for last 1500 blocks (5 hours)",
       x: {label: "UTC time", type: "utc"},
       y: {grid: true, label: "Fee [Gwei]"},
       marks: [
@@ -48,7 +48,7 @@ export function plotPriceWindow(price, window, {width} = {}) {
 
     return Plot.plot({
         width,
-        title: "Window size = 10 minutes, max: red, min: blue, mean: green",
+        title: "Window size = 10 minutes, max: red, min: blue, mean: green (last 5 hours)",
         x: {label: "UTC time", type: "utc"},
         y: { grid: true, label: "Price [euros]"},
         //color: {legend: true},
@@ -79,7 +79,7 @@ export function plotPriceBar(price, {width} = {}) {
 
     return Plot.plot({
         width,
-        title: "Trade volume",
+        title: "Trade volume (last 5 hours)",
         x: {label: "UTC time", type: "utc"},
         y: {grid: true, label: "Number of coins [ETH]"},
         marks: [
