@@ -22,6 +22,7 @@ const URL = "https://mainnet.infura.io/v3/$(key)"
 
 include("helpers.jl")
 
-fee_dict = get_basefee_all(600)
+# 1500 blocks = 5 hours of historical data (12 seconds per block)
+fee_dict = get_basefee_all(1500)
 
 JSON.print(stdout, fee_dict)

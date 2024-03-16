@@ -5,7 +5,7 @@ export function plotFeeRaw(gas_fee_times, {width} = {}) {
 
     return Plot.plot({
       width,
-      title: "Data for last 600 blocks",
+      title: "Data for last 1500 blocks",
       x: {label: "UTC time", type: "utc"},
       y: {grid: true, label: "Fee [Gwei]"},
       marks: [
@@ -27,7 +27,7 @@ export function plotFeeMovingAverage(gas_fee_times, window, {width} = {}) {
 
     return Plot.plot({
         width,
-        title: "Window size = 10 blocks (2 minutes)",
+        title: "Window size = 50 blocks (10 minutes)",
         x: {label: "UTC time", type: "utc"},
         y: {grid: true, label: "Fee [Gwei]"},
         color: {scheme: "BuRd"},

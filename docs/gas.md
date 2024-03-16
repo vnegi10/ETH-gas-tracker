@@ -23,7 +23,7 @@ const gas_fee = FileAttachment("./data/fee.json").json();
 # Base fee moving average
 
 <div class="grid grid-cols-1">
-    <div class="card">${resize((width) => plotFeeMovingAverage(convertDates(gas_fee), 10, {width}))} </div>
+    <div class="card">${resize((width) => plotFeeMovingAverage(convertDates(gas_fee), 50, {width}))} </div>
 </div>
 
 ---
