@@ -74,6 +74,9 @@ function get_basefee_all(num_blocks::Int64)
         push!(fee_dict, Dict("fee" => fee_gwei,
                              "time" => unix2datetime(unix_time)))
 
+        # To avoid rate limiting by Infura
+        sleep(0.15)
+
     end
 
     return fee_dict
