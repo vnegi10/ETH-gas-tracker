@@ -4,7 +4,7 @@ toc: false
 ---
 
 ```js
-import {plotPriceWindow} from "./components/plots.js";
+import {plotPriceWindow, plotPriceBar} from "./components/plots.js";
 import {convertDates} from "./components/helpers.js";
 ```
 
@@ -12,12 +12,16 @@ import {convertDates} from "./components/helpers.js";
 const fiat_price = FileAttachment("./data/price.csv").csv({typed: true});
 ```
 
-# Exchange fiat price
-
-```js
-display(convertDates(fiat_price))
-```
+# Fiat price
 
 <div class="grid grid-cols-1">
     <div class="card">${resize((width) => plotPriceWindow(convertDates(fiat_price), 10, {width}))} </div>
+</div>
+
+---
+
+# Volume
+
+<div class="grid grid-cols-1">
+    <div class="card">${resize((width) => plotPriceBar(convertDates(fiat_price), {width}))} </div>
 </div>

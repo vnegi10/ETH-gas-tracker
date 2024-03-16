@@ -74,3 +74,24 @@ export function plotPriceWindow(price, window, {width} = {}) {
         ]
       })
 }
+
+export function plotPriceBar(price, {width} = {}) {
+
+    return Plot.plot({
+        width,
+        title: "Trade volume",
+        x: {label: "UTC time", type: "utc"},
+        y: {grid: true, label: "Number of coins [ETH]"},
+        marks: [
+          Plot.ruleY([0]),
+          Plot.rectY(price, {
+            x: "time",
+            interval: "minute",
+            y: "volume",
+            fill: "magenta",
+            tip: true
+            })
+        ]
+      });
+
+}
