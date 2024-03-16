@@ -25,3 +25,7 @@ const gas_fee = FileAttachment("./data/fee.json").json();
 <div class="grid grid-cols-1">
     <div class="card">${resize((width) => plotFeeMovingAverage(convertDates(gas_fee), 10, {width}))} </div>
 </div>
+
+---
+
+## Data source: [Infura API](https://docs.infura.io/api/networks/ethereum)

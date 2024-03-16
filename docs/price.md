@@ -25,3 +25,7 @@ const fiat_price = FileAttachment("./data/price.csv").csv({typed: true});
 <div class="grid grid-cols-1">
     <div class="card">${resize((width) => plotPriceBar(convertDates(fiat_price), {width}))} </div>
 </div>
+
+---
+
+## Data source: [Coinbase API](https://docs.infura.io/api/networks/ethereum)
