@@ -7,7 +7,7 @@ export function plotFeeRaw(gas_fee_times, {width} = {}) {
       width,
       title: "Data for last 1500 blocks (5 hours)",
       x: {label: "UTC time", type: "utc"},
-      y: {grid: true, label: "Fee [Gwei]"},
+      y: {grid: true, label: "Fee [Gwei] / gas"},
       marks: [
         Plot.ruleY([0]),
         Plot.lineY(gas_fee_times, {
@@ -27,19 +27,19 @@ export function plotFeeMovingAverage(gas_fee_times, window, {width} = {}) {
 
     return Plot.plot({
         width,
-        title: "Window size = 50 blocks (10 minutes)",
+        title: "Moving average window size = 50 blocks (10 minutes)",
         x: {label: "UTC time", type: "utc"},
-        y: {grid: true, label: "Fee [Gwei]"},
+        y: {grid: true, label: "Estimated fee [euros]"},
         color: {scheme: "BuRd"},
         marks: [
           Plot.ruleY([0]),
           Plot.dot(gas_fee_times, {x: "time",
-                                   y: "fee",
-                                   stroke: "fee",
+                                   y: "fee_eur",
+                                   stroke: "fee_eur",
                                    tip: true}),
           Plot.lineY(gas_fee_times, Plot.windowY(window, 
                                                  {x: "time", 
-                                                  y: "fee"}))
+                                                  y: "fee_eur"}))
         ]
       })
 }
